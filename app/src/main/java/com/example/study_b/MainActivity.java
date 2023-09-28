@@ -3,7 +3,6 @@ package com.example.study_b;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -28,12 +27,7 @@ public class MainActivity extends AppCompatActivity {
         // Increment-by-one button
         // Get it from the XML file then define what it does when clicked
         Button Inc_Button = findViewById(R.id.Plus1_button);
-        Inc_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Increment();
-            }
-        });
+        Inc_Button.setOnClickListener(v -> Increment());
 
         // If this not the first time this activity was created since the app started
         // then the value of the counter is extracted from the saved instance state
