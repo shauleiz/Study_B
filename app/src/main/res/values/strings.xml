@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Study_B</string>
+    <string name="first_Activity_lable">First Activity</string>
 </resources>
