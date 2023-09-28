@@ -2,6 +2,7 @@ package com.example.study_b;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
         Button Inc_Button = findViewById(R.id.Plus1_button);
         Inc_Button.setOnClickListener(v -> Increment());
 
+        Button Next_Button  = findViewById(R.id.skip2activ_button_lable);
+        Next_Button.setOnClickListener(v -> openNewActivity());
+
         // If this not the first time this activity was created since the app started
         // then the value of the counter is extracted from the saved instance state
         if (savedInstanceState != null)
@@ -37,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
         // Get the counter text view and put the counter value in it
         CounterView =  findViewById(R.id.textViewCounter);
         CounterView.setText(String.valueOf(counter));
+    }
+
+    public void openNewActivity(){
+        Intent intent = new Intent(this, SecondActivity.class);
+        startActivity(intent);
     }
 
 
@@ -53,11 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    @Override
-    protected void onDestroy() {
 
-        super.onDestroy();
-    }
 
     // function that increments counter by 1
     // then displays on TextView widget
@@ -66,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         counter++;
         CounterView.setText(String.valueOf(counter) );
     }
+
+
 
 
 }
