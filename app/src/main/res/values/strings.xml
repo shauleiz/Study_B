@@ -3,4 +3,5 @@
     <string name="first_Activity_lable">First Activity</string>
     <string name="inc_button_lable">+1</string>
     <string name="skip2activ_button_lable">Next</string>
+    <string name="EXTRA01">EXTRA01</string>
 </resources>

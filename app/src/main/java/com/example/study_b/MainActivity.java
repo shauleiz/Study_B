@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void openNewActivity(){
         Intent intent = new Intent(this, SecondActivity.class);
+        intent.putExtra("EXTRA01", counter);
         startActivity(intent);
     }
-
 
     // Save counter value in instance state
     // This method is called when the activity is destroyed
