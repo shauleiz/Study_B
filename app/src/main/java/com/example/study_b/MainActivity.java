@@ -12,6 +12,8 @@ public class MainActivity extends AppCompatActivity {
 
     int counter =0; // Counter
     TextView CounterView; // Window to show counter
+    static final String STATE_COUNT = "currentcountervalue";
+
 
 
     // OnCreate is called everytime the main activity is created
@@ -33,10 +35,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        if (savedInstanceState != null)
+            counter = savedInstanceState.getInt(STATE_COUNT);
+
+        // Get the counter text view and put the counter value in it
         CounterView =  findViewById(R.id.textViewCounter);
         CounterView.setText(String.valueOf(counter));
     }
 
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current counter state.
+        savedInstanceState.putInt(STATE_COUNT, counter);
+
+        // Always call the superclass so it can save the view hierarchy state.
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+/*
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        // Always call the superclass so it can restore the view hierarchy.
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // Restore state members from saved instance.
+        counter = savedInstanceState.getInt(STATE_COUNT);
+    }
+*/
 
     @Override
     protected void onDestroy() {
