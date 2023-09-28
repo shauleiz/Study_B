@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // If this not the first time this activity was created since the app started
+        // then the value of the counter is extracted from the saved instance state
         if (savedInstanceState != null)
             counter = savedInstanceState.getInt(STATE_COUNT);
 
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // Save counter value in instance state
+    // This method is called when the activity is destroyed
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Save the user's current counter state.
@@ -53,15 +57,7 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-/*
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        // Always call the superclass so it can restore the view hierarchy.
-        super.onRestoreInstanceState(savedInstanceState);
 
-        // Restore state members from saved instance.
-        counter = savedInstanceState.getInt(STATE_COUNT);
-    }
-*/
 
     @Override
     protected void onDestroy() {
