@@ -17,39 +17,28 @@ import android.widget.TextView;
 import java.time.ZonedDateTime;
 
 
-// MainActivity is the default visual page of the application
+// MainActivity is an activity - The default visual page of the application
 public class MainActivity extends AppCompatActivity {
 
     TextView CounterView; // Window to show counter
-    static final String STATE_COUNT = "currentcountervalue";
 
+    // ViewModel object of class MyViewModel
+    // Holds all UI variables related to this activity
     MyViewModel myViewModel;
 
 
 
 
     // OnCreate is called everytime the main activity is created
-    // It initializes the UI
-    @RequiresApi(api = Build.VERSION_CODES.S)
+    // Initialization of activity is done here
+    @RequiresApi(api = Build.VERSION_CODES.P) // Minimum API level is 'P' (Android 9)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Call the parent class 'OnCreate' method then display the activity as defined in the XML file
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-// TODO: Put in repo
-
-        final ZonedDateTime t_now1 = ZonedDateTime.now();
-        int year1 = t_now1.getYear();
-        int hour1 = t_now1.getHour();
-
-        ZonedDateTime target = t_now1.plusHours(2).plusMinutes(10);
-
-
-       // boolean  ca;
-        AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-
-        // Create/acquire the ViewModel object
+        // Create/acquire the ViewModel object of class myViewModel
         myViewModel = new ViewModelProvider(this).get(MyViewModel.class);
 
         // Increment-by-one button
@@ -57,17 +46,24 @@ public class MainActivity extends AppCompatActivity {
         Button Inc_Button = findViewById(R.id.Plus1_button);
         Inc_Button.setOnClickListener(v -> myViewModel.IncCount());
 
+        // 'Next' button
+        // Click on it and the app is moving to another activity
         Button Next_Button  = findViewById(R.id.skip2activ_button_lable);
         Next_Button.setOnClickListener(v -> openNewActivity());
 
 
 
-        // Get the counter text view and put the counter value in it
+        // Get the counter text view and put the current counter value in it
+        // The counter value is a public member (mld_count) of the ViewModel
         CounterView =  findViewById(R.id.textViewCounter);
         CounterView.setText(String.valueOf(myViewModel.mld_count.getValue()));
 
-        // Define observer to change in count
+        // Define observer for value of counter (myViewModel.mld_count)
+        // It attaches this activity (this) as an observer
         myViewModel.mld_count.observe(this, new Observer<Integer>() {
+            // If value of myViewModel.mld_count changes then OnChanged is called
+            // with  myViewModel.mld_count as parameter (cnt)
+            // Then OnChanged updates text in CounterView
             @Override
             public void onChanged(Integer cnt) {
                 if (cnt != null) {
@@ -78,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Called when button 'Next' is clicked
+    // Creates an intent with target activity (SecondActivity)
+    // Adds an extra parameter of type "EXTRA01" with value = ewModel.mld_count
+    // then start activity
     public void openNewActivity(){
         Intent intent = new Intent(this, SecondActivity.class);
         intent.putExtra("EXTRA01", myViewModel.mld_count.getValue());
