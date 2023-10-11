@@ -20,10 +20,6 @@ import java.time.ZonedDateTime;
 // MainActivity is the default visual page of the application
 public class MainActivity extends AppCompatActivity {
 
-
-
-
-    int counter =0; // Counter
     TextView CounterView; // Window to show counter
     static final String STATE_COUNT = "currentcountervalue";
 
@@ -41,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
 // TODO: Put in repo
 
         final ZonedDateTime t_now1 = ZonedDateTime.now();
@@ -54,9 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
        // boolean  ca;
         AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-  //      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-  //          ca = alarmMgr.canScheduleExactAlarms();
-    //    }
 
         // Create/acquire the ViewModel object
         myViewModel = new ViewModelProvider(this).get(MyViewModel.class);
@@ -69,12 +60,6 @@ public class MainActivity extends AppCompatActivity {
         Button Next_Button  = findViewById(R.id.skip2activ_button_lable);
         Next_Button.setOnClickListener(v -> openNewActivity());
 
-        // If this not the first time this activity was created since the app started
-        // then the value of the counter is extracted from the saved instance state
-        if (savedInstanceState != null) {
-            counter = savedInstanceState.getInt(STATE_COUNT);
-            //myViewModel.mld_count.setValue(savedInstanceState.getInt(STATE_COUNT));
-        }
 
 
         // Get the counter text view and put the counter value in it
@@ -98,35 +83,6 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("EXTRA01", myViewModel.mld_count.getValue());
         startActivity(intent);
     }
-
-    // Save counter value in instance state
-    // This method is called when the activity is destroyed
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        // Save the user's current counter state.
-        savedInstanceState.putInt(STATE_COUNT, counter);
-
-        // Always call the superclass so it can save the view hierarchy state.
-        super.onSaveInstanceState(savedInstanceState);
-    }
-
-
-
-
-/*
-    // function that increments counter by 1
-    // then displays on TextView widget
-    public void Increment()
-    {
-
-        counter++;
-        CounterView.setText(String.valueOf(counter) );
-
-
-    }
-*/
-
-
 
 }
 
